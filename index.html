@@ -8,75 +8,10 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script type="text/javascript" src="/js/lib/dummy.js"></script>
-
-
-
-
-
-
-
-
       <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-
-
-
-
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-   * element that contains the map. */
-
-  #map {
-    height: 100%;
-  }
-
-  /* Optional: Makes the sample page fill the window. */
-
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .button{
-    display: block;
-    height: 50px;
-    padding: 10px;
-    background: #51ba2e;
-    text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-  }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="./style.css"  />
     <title>Info windows by caseyhh</title>
-
-
   <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/common.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/util.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/map.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/onion.js"></script><style type="text/css">.gm-style {
           font: 400 11px Roboto, Arial, sans-serif;
           text-decoration: none;
@@ -95,6 +30,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLim2iaMP5I-JvynMT71zwHKOUOT_6xQ&callback=initMap"></script>
   <script type="text/javascript">
+  var selection = {};
+
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(37.4, -77.1),
@@ -113,7 +50,7 @@
     google.maps.event.addListener(layer, 'click', function(e) {
       //zoom to point
       map.setCenter(e.row.y.value, e.row.x.value);
-      map.setZoom(15)
+      map.setZoom(15);
       // Change the content of the InfoWindow
       link = "https://docs.google.com/forms/d/e/1FAIpQLSetVrMO9wYfwWjT1TeC0H5xSHz5l9fFyAPnM9RTNkihtjoe1g/viewform?usp=pp_url&entry.2092238618&entry.1556369182&entry.479301265&entry.822000149=" +
         e.row.id.value +
@@ -128,19 +65,45 @@
         e.row.park.value;
       if (e.row.status.value == 'approved') {
         e.infoWindowHtml += "<br>Approved!" +
-          "<br><div><h3><a style=\"text-decoration:none;\" class=\"button\" role=\"button\" href=" +
-          link +
-          ">Click here to request this point</a></h3></div><br><b>latitude:</b>" +
+          "<br><div><h3></h3></div><br><b>latitude:</b>" +
           e.row.y.value +
           "<br> <b>longitude:</b> " +
           e.row.x.value +
-          "<br></div>";
+          "<br><button class=\"button\" onclick=\"addSelection("+e.row.id.value+","+e.row.y.value+","+e.row.x.value+")\" >"+//
+          "Click to add this point to your selection!"+
+          "</button></div>";
       }
     });
   }
 
+  function addSelection(id,y,x) {
+    if(!(id in selection)){
+      selectionobject = {'id':id,'y':y,'x':x};
+      selection[id] = selectionobject;
+      ids = '';
+      coordinates = '';
+      for(key in selection){
+        console.log(selection)
+        ids += selection[key]['id']+',';
+        coordinates += selection[key]['y']+','+selection[key]['x']+';';
+        }
+      url = "https://docs.google.com/forms/d/e/1FAIpQLSetVrMO9wYfwWjT1TeC0H5xSHz5l9fFyAPnM9RTNkihtjoe1g/viewform?usp=pp_url&entry.2092238618&entry.1556369182&entry.479301265&entry.822000149=" +
+      ids +
+      "&entry.990579594=" +
+      coordinates;
+      //console.log(url);
+      //console.log(ids);
+      document.getElementById('submit').href = url;
+      document.getElementById('selectionpane').innerHTML += "<div class=\"col-md-1 selection\"><p class=\"text-center\">"+selectionobject['id']+"</p></div>";
+      }
+    else{
+      alert("You have already selected this point")
+    }
+  };
+
   google.maps.event.addDomListener(window, 'load', initMap());
 
   </script>
+  <div id="selectionpane" class="container-fluid"><a class="col-md-1" id="submit" onclick=submitPoints()>Submit</a></div>
   <div id="map"></div>
 </body>
