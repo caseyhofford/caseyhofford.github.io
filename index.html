@@ -11,6 +11,8 @@
     <script type="text/javascript" src="/js/lib/dummy.js"></script>
       <link rel="stylesheet" type="text/css" href="/css/result-light.css">
     <link rel="stylesheet" type="text/css" href="./style.css"  />
+    <link rel="stylesheet" type="text/css" href="./normalize.css"  />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Info windows by caseyhh</title>
   <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/common.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/util.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/map.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/onion.js"></script><style type="text/css">.gm-style {
           font: 400 11px Roboto, Arial, sans-serif;
@@ -20,14 +22,7 @@
 </head>
 <body>
   <link href="/apis/fusiontables/docs/samples/style/default.css" rel="stylesheet" type="text/css">
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" src="style.css">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLim2iaMP5I-JvynMT71zwHKOUOT_6xQ&callback=initMap"></script>
   <script type="text/javascript">
   var selection = {};
@@ -107,13 +102,11 @@
   </script>
   <div class="main-content">
     <div id="map"></div>
-    <div id="selectionpane" class="container-fluid"></div>
-    <div class="submit">
-      <a id="submit" style="line-height: 50">
-        Submit
-      </a>
+    <div class="selection-sidebar">
+      <div id="selectionpane" class="row-md-1 container-fluid"></div>
+        <a id="submit" class="submit">
+          Submit
+        </a>
     </div>
-  </div>
-  <div>
   </div>
 </body>
