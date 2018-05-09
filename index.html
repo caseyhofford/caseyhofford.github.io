@@ -21,8 +21,9 @@
         .gm-style img { max-width: none; }</style><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/infowindow.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/controls.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/marker.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/32/13/stats.js"></script>
 </head>
 <body>
+  <!-->
   <link href="/apis/fusiontables/docs/samples/style/default.css" rel="stylesheet" type="text/css">
-
+  </!-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLim2iaMP5I-JvynMT71zwHKOUOT_6xQ&callback=initMap"></script>
   <script type="text/javascript">
   var selection = {};
@@ -97,7 +98,7 @@
     }
   };
 
-  google.maps.event.addDomListener(window, 'load', initMap());
+
 
   </script>
   <div class="main-content">
@@ -109,4 +110,7 @@
         </a>
     </div>
   </div>
+  <script>
+    google.maps.event.addDomListener(window, 'load', initMap());
+  </script>
 </body>
