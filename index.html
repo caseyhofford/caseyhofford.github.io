@@ -58,7 +58,10 @@
       e.infoWindowHtml = "<h3>" +
         e.row.park.value +
         "</h3><br><b>ID #:</b>" +
-        e.row.id.value + "<br><b>Park or Region:</b> " +
+        "<div class=\"row-md-1 selection\"><p class=\"text-center\">"+
+        e.row.id.value+
+        "</p></div>"+
+        "<br><b>Park or Region:</b> " +
         e.row.park.value;
       if (e.row.status.value == 'approved') {
         e.infoWindowHtml += "<br>Approved!" +
