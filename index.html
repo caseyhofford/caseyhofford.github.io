@@ -46,7 +46,9 @@
 
     google.maps.event.addListener(layer, 'click', function(e) {
       //zoom to point
-      map.setCenter(e.row.y.value, e.row.x.value);
+      console.log(e.row.y.value + e.row.x.value);
+      recenter = new google.maps.LatLng(e.row.y.value, e.row.x.value)
+      map.setCenter(recenter);
       map.setZoom(15);
       // Change the content of the InfoWindow
       link = "https://docs.google.com/forms/d/e/1FAIpQLSetVrMO9wYfwWjT1TeC0H5xSHz5l9fFyAPnM9RTNkihtjoe1g/viewform?usp=pp_url&entry.2092238618&entry.1556369182&entry.479301265&entry.822000149=" +
