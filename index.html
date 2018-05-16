@@ -27,6 +27,7 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLim2iaMP5I-JvynMT71zwHKOUOT_6xQ&callback=initMap"></script>
   <script type="text/javascript">
   var selection = {};
+  var tableid = '1qI4VXy_a-VcKxQfCoGpCcguPPe3fjlB2Xmdqxklt'
 
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -39,7 +40,7 @@
     var layer = new google.maps.FusionTablesLayer({
       query: {
         select: '\'Geocodable address\'',
-        from: '1fI9dkixV9bS-v8UC0zqEHjBcP-_WsFaxsSx1k55b'
+        from: tableid
       },
       map: map
     });
@@ -75,6 +76,11 @@
           "Click to add this point to your selection!"+
           "</button></div>";
       }
+      if (e.row.trail.value != '') {
+        e.infoWindowHtml += "<br><h3>Access Trail:</h3><p>" +
+        e.row.trail.value +
+        "</p>"
+      }
     });
   }
 
@@ -82,6 +88,33 @@
     if(!(id in selection)){
       selectionobject = {'id':id,'y':y,'x':x};
       selection[id] = selectionobject;
+      ids = '';
+      coordinates = '';
+      for(key in selection){
+        //console.log(selection)
+        ids += selection[key]['id']+',';
+        coordinates += selection[key]['y']+','+selection[key]['x']+';';
+        }
+      url = "https://docs.google.com/forms/d/e/1FAIpQLSetVrMO9wYfwWjT1TeC0H5xSHz5l9fFyAPnM9RTNkihtjoe1g/viewform?usp=pp_url&entry.2092238618&entry.1556369182&entry.479301265&entry.822000149=" +
+      ids +
+      "&entry.990579594=" +
+      coordinates;
+      //console.log(url);
+      //console.log(ids);
+      document.getElementById('submit').href = url;
+      document.getElementById('selectionpane').innerHTML += "<div id=\""+selectionobject['id']+"\" class=\"row-md-1 selection\"><p class=\"text-center\" onclick=\"removeSelection("+selectionobject['id']+")\">"+selectionobject['id']+"</p></div>";
+      }
+    else{
+      alert("You have already selected this point")
+    }
+  };
+
+  function removeSelection(id) {
+    if(id in selection){
+      element = document.getElementById(id);
+      element.parentNode.removeChild(element);
+      delete selection[id];
+      console.log(selection)
       ids = '';
       coordinates = '';
       for(key in selection){
@@ -93,16 +126,12 @@
       ids +
       "&entry.990579594=" +
       coordinates;
-      //console.log(url);
-      //console.log(ids);
       document.getElementById('submit').href = url;
-      document.getElementById('selectionpane').innerHTML += "<div class=\"row-md-1 selection\"><p class=\"text-center\">"+selectionobject['id']+"</p></div>";
-      }
-    else{
-      alert("You have already selected this point")
     }
-  };
-
+    else {
+      alert("This ID is not in your selection.");
+    }
+  }
 
 
   </script>
@@ -110,7 +139,7 @@
     <div id="map"></div>
     <div class="selection-sidebar">
       <div id="selectionpane" class="row-md-1 container-fluid"></div>
-        <a id="submit" class="submit">
+        <a id="submit" class="submit" target="_blank">
           Submit
         </a>
     </div>
