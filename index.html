@@ -66,16 +66,14 @@
         "</p></div>"+
         "<br><b>Park or Region:</b> " +
         e.row.park.value;
-      if (e.row.status.value == 'approved') {
-        e.infoWindowHtml += "<br>Approved!" +
-          "<br><div><h3></h3></div><br><b>latitude:</b>" +
-          e.row.y.value +
-          "<br> <b>longitude:</b> " +
-          e.row.x.value +
-          "<br><button class=\"button\" onclick=\"addSelection("+e.row.id.value+","+e.row.y.value+","+e.row.x.value+")\" >"+//
-          "Click to add this point to your selection!"+
-          "</button></div>";
-      }
+      e.infoWindowHtml += "<br>Approved!" +
+        "<br><div><h3></h3></div><br><b>latitude:</b>" +
+        e.row.y.value +
+        "<br> <b>longitude:</b> " +
+        e.row.x.value +
+        "<br><button class=\"button\" onclick=\"addSelection("+e.row.id.value+","+e.row.y.value+","+e.row.x.value+")\" >"+//
+        "Click to add this point to your selection!"+
+        "</button></div>";
       if (e.row.trail.value != '') {
         e.infoWindowHtml += "<br><h3>Access Trail:</h3><p>" +
         e.row.trail.value +
